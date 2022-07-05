@@ -18,6 +18,8 @@ void merge_sort(int arr[], int const begin, int const end);
 
 void bubble_sort(int arr[], int n);
 
+void selection_sort(int arr[], int n);
+
 int *random_arr()
 {
     static int a[SIZE];
@@ -169,6 +171,24 @@ void bubble_sort(int arr[], int n)
     }
 }
 
+void selection_sort(int arr[], int n)
+{
+    for (int i = 0; i < n - 1; i++)
+    {
+        int min_index = i;
+        for (int j = i + 1; j < n; j++)
+        {
+            if (arr[j] < arr[min_index])
+            {
+                min_index = j;
+            }
+        }
+        int t = *&arr[min_index];
+        *&arr[min_index] = *&arr[i];
+        *&arr[i] = t;
+    }
+}
+
 int main()
 {
     int *arr = random_arr();
@@ -176,7 +196,8 @@ int main()
     // insertion_sort(arr, SIZE);
     // quick_sort(arr, 0, SIZE - 1);
     // merge_sort(arr, 0, SIZE - 1);
-    bubble_sort(arr, SIZE);
+    // bubble_sort(arr, SIZE);
+    selection_sort(arr, SIZE);
     print(arr);
 
     return 0;
