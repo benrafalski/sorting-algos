@@ -7,9 +7,14 @@ using namespace std;
 
 int *random_arr();
 void print(int arr[]);
+
 void insertion_sort(int arr[], int n);
+
 int partition(int arr[], int low, int high);
 void quick_sort(int arr[], int low, int high);
+
+void merge(int arr[], int const left, int const mid, int const right);
+void merge_sort(int arr[], int const begin, int const end);
 
 int *random_arr()
 {
@@ -87,12 +92,72 @@ void quick_sort(int arr[], int low, int high)
     }
 }
 
+void merge(int arr[], int const left, int const mid, int const right)
+{
+    auto const subOne = mid - left + 1;
+    auto const subTwo = right - mid;
+
+    auto *leftArr = new int[subOne], *rightArr = new int[subTwo];
+
+    for (auto i = 0; i < subOne; i++)
+    {
+        leftArr[i] = arr[left + i];
+    }
+    for (auto j = 0; j < subTwo; j++)
+    {
+        rightArr[j] = arr[mid + 1 + j];
+    }
+
+    auto indexOfSubOne = 0, indexOfSubTwo = 0;
+    int indexOfMerge = left;
+    while (indexOfSubOne < subOne && indexOfSubTwo < subTwo)
+    {
+        if (leftArr[indexOfSubOne] <= rightArr[indexOfSubTwo])
+        {
+            arr[indexOfMerge] = leftArr[indexOfSubOne];
+            indexOfSubOne++;
+        }
+        else
+        {
+            arr[indexOfMerge] = rightArr[indexOfSubTwo];
+            indexOfSubTwo++;
+        }
+        indexOfMerge++;
+    }
+    while (indexOfSubOne < subOne)
+    {
+        arr[indexOfMerge] = leftArr[indexOfSubOne];
+        indexOfSubOne++;
+        indexOfMerge++;
+    }
+
+    while (indexOfSubTwo < subTwo)
+    {
+        arr[indexOfMerge] = rightArr[indexOfSubTwo];
+        indexOfSubTwo++;
+        indexOfMerge++;
+    }
+}
+
+void merge_sort(int arr[], int const begin, int const end)
+{
+    if (begin >= end)
+    {
+        return;
+    }
+    auto mid = begin + (end - begin) / 2;
+    merge_sort(arr, begin, mid);
+    merge_sort(arr, mid + 1, end);
+    merge(arr, begin, mid, end);
+}
+
 int main()
 {
     int *arr = random_arr();
     print(arr);
     // insertion_sort(arr, SIZE);
-    quick_sort(arr, 0, SIZE - 1);
+    // quick_sort(arr, 0, SIZE - 1);
+    merge_sort(arr, 0, SIZE - 1);
     print(arr);
 
     return 0;
