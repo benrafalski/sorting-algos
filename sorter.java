@@ -3,7 +3,8 @@ public class Sorter {
   public static void main(String[] args) {
     int[] arr = { 4, 6, 3, 65, 10 };
     // insertion_sort(arr);
-    quick_sort(arr, 0, 4);
+    // quick_sort(arr, 0, 4);
+    merge_sort(arr, 0, 4);
 
     for (int i = 0; i < 5; i++) {
       System.out.println(arr[i]);
@@ -47,5 +48,57 @@ public class Sorter {
       quick_sort(a, low, pi - 1);
       quick_sort(a, pi + 1, high);
     }
+  }
+
+  public static void merge(
+    int arr[],
+    final int left,
+    final int mid,
+    final int right
+  ) {
+    final var subOne = mid - left + 1;
+    final var subTwo = right - mid;
+
+    int[] leftArr = new int[subOne], rightArr = new int[subTwo];
+
+    for (var i = 0; i < subOne; i++) {
+      leftArr[i] = arr[left + i];
+    }
+    for (var j = 0; j < subTwo; j++) {
+      rightArr[j] = arr[mid + 1 + j];
+    }
+
+    int  indexOfSubOne = 0, indexOfSubTwo = 0, indexOfMerge = left;
+    while (indexOfSubOne < subOne && indexOfSubTwo < subTwo) {
+      if (leftArr[indexOfSubOne] <= rightArr[indexOfSubTwo]) {
+        arr[indexOfMerge] = leftArr[indexOfSubOne];
+        indexOfSubOne++;
+      } else {
+        arr[indexOfMerge] = rightArr[indexOfSubTwo];
+        indexOfSubTwo++;
+      }
+      indexOfMerge++;
+    }
+    while (indexOfSubOne < subOne) {
+      arr[indexOfMerge] = leftArr[indexOfSubOne];
+      indexOfSubOne++;
+      indexOfMerge++;
+    }
+
+    while (indexOfSubTwo < subTwo) {
+      arr[indexOfMerge] = rightArr[indexOfSubTwo];
+      indexOfSubTwo++;
+      indexOfMerge++;
+    }
+  }
+
+  public static void merge_sort(int arr[], final int begin, final int end) {
+    if (begin >= end) {
+      return;
+    }
+    var mid = begin + (end - begin) / 2;
+    merge_sort(arr, begin, mid);
+    merge_sort(arr, mid + 1, end);
+    merge(arr, begin, mid, end);
   }
 }
