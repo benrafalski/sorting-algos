@@ -194,10 +194,10 @@ int main()
     int *arr = random_arr();
     print(arr);
     // insertion_sort(arr, SIZE);
-    // quick_sort(arr, 0, SIZE - 1);
+    quick_sort(arr, 0, SIZE - 1);
     // merge_sort(arr, 0, SIZE - 1);
     // bubble_sort(arr, SIZE);
-    selection_sort(arr, SIZE);
+    // selection_sort(arr, SIZE);
     print(arr);
 
     return 0;

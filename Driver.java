@@ -1,31 +1,16 @@
-public class Sorter {
+public class Driver {
+    public static void main(String[] args){
+        int[] arr = {4,6,3,65,10};
+        // Sorter sorter = new Sorter(arr);
+        // sorter.quick_sort(arr, 0, 4);
+        quick_sort(arr, 0, 4);
 
-    int[] array;
-    int size;
-
-    public Sorter(int[] arr){
-        this.array = arr;
-        this.size = arr.length;
-    }
-
-    public void insertion_sort()
-    {
-        int i, key, j;
-        for (i = 1; i < size; i++)
-        {
-            key = array[i];
-            j = i - 1;
-
-            while (j >= 0 && array[j] > key)
-            {
-                array[j + 1] = array[j];
-                j = j - 1;
-            }
-            array[j + 1] = key;
+        for(int i = 0; i < 5; i++){
+            System.out.println(arr[i]);
         }
     }
 
-    static public int partition(int[] a, int high, int low){
+    static public int partition(int[] a, int low, int high){
         int pivot = a[high];
         int i = (low - 1);
         for (int j = low; j <= high - 1; j++)
@@ -55,7 +40,4 @@ public class Sorter {
             quick_sort(arr, pi + 1, high);
         }
     }
-
-
-
 }
