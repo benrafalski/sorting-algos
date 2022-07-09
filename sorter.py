@@ -1,4 +1,11 @@
 
+def bubble_sort(arr, n):
+    for i in range(n-1):
+        for j in range(n - i - 1):
+            if arr[j] > arr[j + 1]:
+                t = arr[j]
+                arr[j] = arr[j + 1]
+                arr[j + 1] = t
 
 def merge(arr, LEFT, MID, RIGHT):
 
@@ -83,7 +90,8 @@ def main():
     print(arr)
     # insertion_sort(arr, 5)
     # quick_sort(arr, 0, 4)
-    merge_sort(arr, 0, 4)
+    # merge_sort(arr, 0, 4)
+    bubble_sort(arr, 5)
     print(arr)
 
 if __name__=="__main__":
