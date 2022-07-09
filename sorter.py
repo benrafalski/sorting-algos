@@ -1,4 +1,16 @@
 
+def selection_sort(arr, n):
+    for i in range(n-1):
+        min_index = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_index]:
+                min_index = j
+
+        t = arr[min_index]
+        arr[min_index] = arr[i]
+        arr[i] = t
+
+
 def bubble_sort(arr, n):
     for i in range(n-1):
         for j in range(n - i - 1):
@@ -6,6 +18,7 @@ def bubble_sort(arr, n):
                 t = arr[j]
                 arr[j] = arr[j + 1]
                 arr[j + 1] = t
+
 
 def merge(arr, LEFT, MID, RIGHT):
 
@@ -17,9 +30,9 @@ def merge(arr, LEFT, MID, RIGHT):
 
     for i in range(SUB_ONE):
         leftArr[i] = arr[LEFT + i]
-    
+
     for i in range(SUB_TWO):
-        rightArr[i] = arr[MID+ 1 + i]
+        rightArr[i] = arr[MID + 1 + i]
 
     indexOfSubOne = 0
     indexOfSubTwo = 0
@@ -42,7 +55,8 @@ def merge(arr, LEFT, MID, RIGHT):
         arr[indexOfMerge] = rightArr[indexOfSubTwo]
         indexOfSubTwo = indexOfSubTwo + 1
         indexOfMerge = indexOfMerge + 1
-    
+
+
 def merge_sort(arr, BEGIN, END):
     if BEGIN >= END:
         return
@@ -50,6 +64,7 @@ def merge_sort(arr, BEGIN, END):
     merge_sort(arr, BEGIN, mid)
     merge_sort(arr, mid + 1, END)
     merge(arr, BEGIN, mid, END)
+
 
 def partition(arr, low, high):
     pivot = arr[high]
@@ -71,7 +86,6 @@ def quick_sort(arr, low, high):
         pi = partition(arr, low, high)
         quick_sort(arr, low, pi - 1)
         quick_sort(arr, pi + 1, high)
-    
 
 
 def insertion_sort(arr, n):
@@ -86,16 +100,15 @@ def insertion_sort(arr, n):
 
 
 def main():
-    arr = [5,3,4,1,8]
+    arr = [5, 3, 4, 1, 8]
     print(arr)
     # insertion_sort(arr, 5)
     # quick_sort(arr, 0, 4)
     # merge_sort(arr, 0, 4)
-    bubble_sort(arr, 5)
+    # bubble_sort(arr, 5)
+    selection_sort(arr, 5)
     print(arr)
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main()
-    
-
-
