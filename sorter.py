@@ -1,4 +1,49 @@
 
+
+def merge(arr, LEFT, MID, RIGHT):
+
+    SUB_ONE = MID - LEFT + 1
+    SUB_TWO = RIGHT - MID
+
+    leftArr = [0] * SUB_ONE
+    rightArr = [0] * SUB_TWO
+
+    for i in range(SUB_ONE):
+        leftArr[i] = arr[LEFT + i]
+    
+    for i in range(SUB_TWO):
+        rightArr[i] = arr[MID+ 1 + i]
+
+    indexOfSubOne = 0
+    indexOfSubTwo = 0
+    indexOfMerge = LEFT
+    while indexOfSubOne < SUB_ONE and indexOfSubTwo < SUB_TWO:
+        if leftArr[indexOfSubOne] <= rightArr[indexOfSubTwo]:
+            arr[indexOfMerge] = leftArr[indexOfSubOne]
+            indexOfSubOne = indexOfSubOne + 1
+        else:
+            arr[indexOfMerge] = rightArr[indexOfSubTwo]
+            indexOfSubTwo = indexOfSubTwo + 1
+        indexOfMerge = indexOfMerge + 1
+
+    while indexOfSubOne < SUB_ONE:
+        arr[indexOfMerge] = leftArr[indexOfSubOne]
+        indexOfSubOne = indexOfSubOne + 1
+        indexOfMerge = indexOfMerge + 1
+
+    while indexOfSubTwo < SUB_TWO:
+        arr[indexOfMerge] = rightArr[indexOfSubTwo]
+        indexOfSubTwo = indexOfSubTwo + 1
+        indexOfMerge = indexOfMerge + 1
+    
+def merge_sort(arr, BEGIN, END):
+    if BEGIN >= END:
+        return
+    mid = BEGIN + (END - BEGIN) / 2
+    merge_sort(arr, BEGIN, mid)
+    merge_sort(arr, mid + 1, END)
+    merge(arr, BEGIN, mid, END)
+
 def partition(arr, low, high):
     pivot = arr[high]
     i = (low - 1)
@@ -35,10 +80,11 @@ def insertion_sort(arr, n):
 
 def main():
     arr = [5,3,4,1,8]
+    print(arr)
     # insertion_sort(arr, 5)
-    quick_sort(arr, 0, 4)
-    for i in range(5):
-        print(arr[i])
+    # quick_sort(arr, 0, 4)
+    merge_sort(arr, 0, 4)
+    print(arr)
 
 if __name__=="__main__":
     main()
