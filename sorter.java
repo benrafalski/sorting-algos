@@ -4,7 +4,8 @@ public class Sorter {
     int[] arr = { 4, 6, 3, 65, 10 };
     // insertion_sort(arr);
     // quick_sort(arr, 0, 4);
-    merge_sort(arr, 0, 4);
+    // merge_sort(arr, 0, 4);
+    bubble_sort(arr, 5);
 
     for (int i = 0; i < 5; i++) {
       System.out.println(arr[i]);
@@ -100,5 +101,22 @@ public class Sorter {
     merge_sort(arr, begin, mid);
     merge_sort(arr, mid + 1, end);
     merge(arr, begin, mid, end);
+  }
+
+
+  public static void bubble_sort(int arr[], int n)
+  {
+      for (int i = 0; i < n - 1; i++)
+      {
+          for (int j = 0; j < n - i - 1; j++)
+          {
+              if (arr[j] > arr[j + 1])
+              {
+                  int t = arr[j];
+                  arr[j] = arr[j + 1];
+                  arr[j + 1] = t;
+              }
+          }
+      }
   }
 }
