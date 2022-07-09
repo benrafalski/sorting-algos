@@ -5,8 +5,8 @@ public class Sorter {
     // insertion_sort(arr);
     // quick_sort(arr, 0, 4);
     // merge_sort(arr, 0, 4);
-    bubble_sort(arr, 5);
-
+    // bubble_sort(arr, 5);
+    selection_sort(arr, 5);
     for (int i = 0; i < 5; i++) {
       System.out.println(arr[i]);
     }
@@ -117,6 +117,24 @@ public class Sorter {
                   arr[j + 1] = t;
               }
           }
+      }
+  }
+
+  public static void selection_sort(int arr[], int n)
+  {
+      for (int i = 0; i < n - 1; i++)
+      {
+          int min_index = i;
+          for (int j = i + 1; j < n; j++)
+          {
+              if (arr[j] < arr[min_index])
+              {
+                  min_index = j;
+              }
+          }
+          int t = arr[min_index];
+          arr[min_index] = arr[i];
+          arr[i] = t;
       }
   }
 }
